@@ -1,0 +1,27 @@
+# Horizontal Pod Autoscaler.
+#
+# Apply this on GKE (Part B, Step 4). GKE runs metrics-server by default, so the HPA
+# can read pod CPU usage and report a real target. A default `kind` cluster does NOT
+# run metrics-server, so on kind the HPA would sit at <unknown>/60% forever. That is
+# why Part C scales replicas by hand instead of relying on the autoscaler.
+#
+# Note that averageUtilization is a percentage of the CPU *request*, not the limit.
+# If you change requests in deployment.yaml, you change what 60% means here.
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: report-api
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: report-api
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 60

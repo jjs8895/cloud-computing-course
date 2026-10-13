@@ -1,0 +1,8 @@
+=== 2026-10-13 15:26:18 EDT ===
+$ python3 perf-optimization/loadgen.py --url http://localhost:30080 --pattern hot \                                                                                                      --duration 30 --concurrency 10 --label baseline-hot \                                                                                                                                                                                        --json-out results/baseline-hot.json
+usage: loadgen.py [-h] [--url URL] [--pattern {hot,unique}]
+                  [--duration DURATION] [--concurrency CONCURRENCY]
+                  [--label LABEL] [--json-out JSON_OUT]
+loadgen.py: error: unrecognized arguments:    
+[exit code: 2]
+

@@ -1,0 +1,29 @@
+=== 2026-10-13 16:46:54 EDT ===
+$ python3 loadgen.py --url http://localhost:30080 --pattern unique   --duration 30 --concurrency 10 --label optimized-unique   --json-out results/optimized-unique.json
+Target       : http://localhost:30080
+Pattern      : unique (17576 distinct symbols)
+Duration     : 30s
+Concurrency  : 10
+Running...
+
+==========================================================
+  RESULTS  (unique pattern, 10 clients)
+==========================================================
+  Throughput        :       8.18 req/s
+  Requests OK       :        254
+  Requests failed   :          0  (0.0%)
+  ------------------------------------------------------
+  Latency mean      :    1208.21 ms
+  Latency p50       :    1203.70 ms
+  Latency p90       :    1496.97 ms
+  Latency p95       :    1589.41 ms
+  Latency p99       :    1700.68 ms
+  Latency max       :    1780.82 ms
+  ------------------------------------------------------
+  Pods observed     : 1 ['report-api-6bf8dd85f7-xdn5d']
+  Cache hit rate    :     0.0000  (0 hits / 129 misses, sampled from pod report-api-6bf8dd85f7-xdn5d)
+==========================================================
+
+Saved results to results/optimized-unique.json
+[exit code: 0]
+

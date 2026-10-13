@@ -1,0 +1,32 @@
+{
+  "label": "baseline-unique",
+  "url": "http://localhost:30080",
+  "pattern": "unique",
+  "duration_s": 30.98,
+  "concurrency": 10,
+  "requests_total": 334,
+  "requests_ok": 334,
+  "requests_failed": 0,
+  "error_rate_pct": 0.0,
+  "throughput_rps": 10.78,
+  "latency_ms": {
+    "mean": 912.09,
+    "p50": 888.81,
+    "p90": 1146.78,
+    "p95": 1385.52,
+    "p99": 1504.34,
+    "max": 1559.8
+  },
+  "distinct_pods_observed": [
+    "report-api-76dc996c86-zxwrr"
+  ],
+  "outcomes": {
+    "200": 334
+  },
+  "cache_sample": {
+    "cache_hits": 0,
+    "cache_misses": 334,
+    "cache_hit_rate": 0.0,
+    "sampled_from_pod": "report-api-76dc996c86-zxwrr"
+  }
+}

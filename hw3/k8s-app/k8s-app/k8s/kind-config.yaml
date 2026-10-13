@@ -1,0 +1,18 @@
+# Cluster definition for the local `kind` cluster used in Part B (Step 3a) and Part C.
+#
+# The extraPortMappings entry forwards port 30080 on your host to port 30080 on the
+# kind node, so the NodePort service in service.yaml is reachable at
+# http://localhost:30080 without kubectl port-forward. That matters for Part C: routing
+# a load test through `kubectl port-forward` sends every request through the API server
+# and would measure the proxy instead of your application.
+#
+# Create the cluster from the hw3/k8s-app directory with:
+#   kind create cluster --name cmpe789-hw3 --config k8s/kind-config.yaml
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+  - role: control-plane
+    extraPortMappings:
+      - containerPort: 30080
+        hostPort: 30080
+        protocol: TCP

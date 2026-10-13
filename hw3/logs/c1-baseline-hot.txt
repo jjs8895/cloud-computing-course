@@ -1,0 +1,29 @@
+=== 2026-10-13 15:27:48 EDT ===
+$ python3 loadgen.py --url http://localhost:30080 --pattern hot   --duration 30 --concurrency 10 --label baseline-hot   --json-out results/baseline-hot.json
+Target       : http://localhost:30080
+Pattern      : hot (8 distinct symbols)
+Duration     : 30s
+Concurrency  : 10
+Running...
+
+==========================================================
+  RESULTS  (hot pattern, 10 clients)
+==========================================================
+  Throughput        :      11.67 req/s
+  Requests OK       :        361
+  Requests failed   :          0  (0.0%)
+  ------------------------------------------------------
+  Latency mean      :     844.32 ms
+  Latency p50       :     826.65 ms
+  Latency p90       :     934.49 ms
+  Latency p95       :     984.54 ms
+  Latency p99       :    1018.81 ms
+  Latency max       :    1087.23 ms
+  ------------------------------------------------------
+  Pods observed     : 1 ['report-api-76dc996c86-zxwrr']
+  Cache hit rate    :     0.0000  (0 hits / 361 misses, sampled from pod report-api-76dc996c86-zxwrr)
+==========================================================
+
+Saved results to results/baseline-hot.json
+[exit code: 0]
+

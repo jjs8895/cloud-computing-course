@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: report-api
+  labels:
+    app: report-api
+spec:
+  # TODO (HW3 Part C, Optimization 3a): one replica means one pod absorbs every request.
+  # Scale this out once you understand which load pattern actually benefits from it.
+  replicas: 1
+  selector:
+    matchLabels:
+      app: report-api
+  template:
+    metadata:
+      labels:
+        app: report-api
+    spec:
+      # TODO (HW3 Part B, Step 4): add a pod-level securityContext here.
+      #   runAsNonRoot: true
+      #   runAsUser: 10001
+      #   seccompProfile:
+      #     type: RuntimeDefault
+      containers:
+        - name: report-api
+          # Replace <IMAGE> with the image you built:
+          #   local kind cluster -> report-api:v1
+          #   GKE                -> us-central1-docker.pkg.dev/<PROJECT_ID>/cmpe789/report-api:v1
+          image: report-api:v4
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+
+          # TODO (HW3 Part B, Step 4): add a container-level securityContext here.
+          #   allowPrivilegeEscalation: false
+          #   readOnlyRootFilesystem: true
+          #   capabilities:
+          #     drop: ["ALL"]
+          # Gunicorn needs a writable worker temporary directory even when the
+          # root filesystem is read-only. Add the volumeMount below in Step 4:
+          #   volumeMounts:
+          #     - name: tmp
+          #       mountPath: /tmp
+
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+
+            # SECURITY DEFECT (HW3 Part B, Step 4): this token is committed to the
+            # repository in plaintext and is visible to anyone who can run
+            # `kubectl get deployment report-api -o yaml`. Move it into a Kubernetes
+            # Secret and reference it here with secretKeyRef instead.
+            - name: API_TOKEN
+              value: "hw3-plaintext-token-do-not-ship"
+
+          # TODO (HW3 Part B, Step 4): add readiness and liveness probes against
+          # /health on port 8080, so Kubernetes only sends traffic to pods that are
+          # ready and restarts pods that stop responding.
+
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              # TODO (HW3 Part C, Optimization 3b): this CPU limit throttles the
+              # container to half a core. Adding gunicorn workers while this stays at
+              # 500m will NOT help: the workers just contend for the same half core.
+              # Raise it deliberately and explain the number you chose.
+              cpu: 500m
+              memory: 256Mi
+
+      # TODO (HW3 Part B, Step 4): when readOnlyRootFilesystem is enabled,
+      # add a memory-backed writable /tmp for Gunicorn:
+      # volumes:
+      #   - name: tmp
+      #     emptyDir:
+      #       medium: Memory

@@ -1,0 +1,186 @@
+=== 2026-10-12 16:21:54 EDT ===
+$ docker build -t us-central1-docker.pkg.dev/hw1concepts/cmpe789/report-api:v1 . && docker push us-central1-docker.pkg.dev/hw1concepts/cmpe789/report-api:v1
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.63kB done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 97B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.12-slim
+#3 DONE 2.4s
+
+#4 [1/6] FROM docker.io/library/python:3.12-slim@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 63B done
+#5 DONE 0.0s
+
+#6 [4/6] RUN pip install --no-cache-dir -r requirements.txt
+#6 CACHED
+
+#7 [5/6] COPY app.py .
+#7 CACHED
+
+#8 [2/6] WORKDIR /app
+#8 CACHED
+
+#9 [3/6] COPY requirements.txt .
+#9 CACHED
+
+#10 [6/6] RUN useradd --uid 10001 --no-create-home --shell /usr/sbin/nologin appuser
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:462535be5f41ab843a4bdf3316d23875d8e6df441f7e6d4b0db38fee789cca27 done
+#11 naming to us-central1-docker.pkg.dev/hw1concepts/cmpe789/report-api:v1 0.0s done
+#11 DONE 0.0s
+
+What's Next?
+  View a summary of image vulnerabilities and recommendations → docker scout quickview
+The push refers to repository [us-central1-docker.pkg.dev/hw1concepts/cmpe789/report-api]
+86f2f2b711b2: Preparing
+caf397b94711: Preparing
+a639b6600787: Preparing
+173ea50873c9: Preparing
+3a6d12bab306: Preparing
+dca2a125b490: Preparing
+b361fa3b9794: Preparing
+e1fa2746ad6d: Preparing
+15f1c8eb1ab1: Preparing
+dca2a125b490: Waiting
+e1fa2746ad6d: Waiting
+b361fa3b9794: Waiting
+15f1c8eb1ab1: Waiting
+173ea50873c9: Pushed
+86f2f2b711b2: Pushed
+caf397b94711: Pushed
+3a6d12bab306: Pushed
+dca2a125b490: Pushed
+a639b6600787: Pushed
+e1fa2746ad6d: Pushed
+b361fa3b9794: Pushed
+15f1c8eb1ab1: Pushed
+v1: digest: sha256:723c6749c10662c8407d726ee79a700e15e77390bc2004ca28502f26d28436c5 size: 2199
+[exit code: 0]
+
+=== 2026-10-12 16:23:42 EDT ===
+$ docker buildx build --platform linux/amd64 -t us-central1-docker.pkg.dev/hw1concepts/cmpe789/report-api:v1 --push .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.63kB done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 97B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.12-slim
+#3 DONE 0.4s
+
+#4 [1/6] FROM docker.io/library/python:3.12-slim@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 63B done
+#5 DONE 0.0s
+
+#6 [2/6] WORKDIR /app
+#6 CACHED
+
+#7 [3/6] COPY requirements.txt .
+#7 CACHED
+
+#8 [4/6] RUN pip install --no-cache-dir -r requirements.txt
+#8 CACHED
+
+#9 [5/6] COPY app.py .
+#9 CACHED
+
+#10 [6/6] RUN useradd --uid 10001 --no-create-home --shell /usr/sbin/nologin appuser
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:462535be5f41ab843a4bdf3316d23875d8e6df441f7e6d4b0db38fee789cca27 done
+#11 naming to us-central1-docker.pkg.dev/hw1concepts/cmpe789/report-api:v1 done
+#11 DONE 0.0s
+
+#12 pushing us-central1-docker.pkg.dev/hw1concepts/cmpe789/report-api:v1 with docker
+#12 pushing layer 86f2f2b711b2
+#12 pushing layer caf397b94711
+#12 pushing layer a639b6600787
+#12 pushing layer 173ea50873c9
+#12 pushing layer 3a6d12bab306
+#12 pushing layer dca2a125b490 0.0s
+#12 pushing layer b361fa3b9794 0.0s
+#12 pushing layer e1fa2746ad6d 0.0s
+#12 pushing layer 15f1c8eb1ab1 0.0s
+#12 pushing layer caf397b94711 1.9s done
+#12 pushing layer 86f2f2b711b2 1.9s done
+#12 pushing layer a639b6600787 1.9s done
+#12 pushing layer 173ea50873c9 1.9s done
+#12 pushing layer 3a6d12bab306 1.9s done
+#12 pushing layer dca2a125b490 2.0s done
+#12 pushing layer b361fa3b9794 2.0s done
+#12 pushing layer e1fa2746ad6d 2.0s done
+#12 pushing layer 15f1c8eb1ab1 2.0s done
+#12 DONE 3.0s
+[exit code: 0]
+
+=== 2026-10-12 16:27:52 EDT ===
+$ gcloud container clusters create cmpe789-hw3   --zone=us-central1-a   --num-nodes=2   --machine-type=e2-small
+Note: Your Pod address range (`--cluster-ipv4-cidr`) can accommodate at most 1008 node(s).
+ERROR: (gcloud.container.clusters.create) ResponseError: code=409, message=Already exists: projects/hw1concepts/zones/us-central1-a/clusters/cmpe789-hw3.
+[exit code: 1]
+
+=== 2026-10-12 16:28:38 EDT ===
+$ gcloud container clusters get-credentials cmpe789-hw3 --zone=us-central1-a
+Fetching cluster endpoint and auth data.
+WARNING: cluster cmpe789-hw3 is not RUNNING. The kubernetes API may or may not be available. Check the cluster status for more information.
+kubeconfig entry generated for cmpe789-hw3.
+[exit code: 0]
+
+=== 2026-10-12 16:29:16 EDT ===
+$ kubectl apply -f k8s/deployment.yaml
+error: error validating "k8s/deployment.yaml": error validating data: failed to download openapi: Get "https://35.222.112.88/openapi/v2?timeout=32s": dial tcp 35.222.112.88:443: connect: connection refused; if you choose to ignore these errors, turn validation off with --validate=false
+[exit code: 1]
+
+=== 2026-10-12 16:32:58 EDT ===
+$ kubectl apply -f k8s/deployment.yaml
+deployment.apps/report-api created
+[exit code: 0]
+
+=== 2026-10-12 16:33:31 EDT ===
+$ kubectl apply -f k8s/service.yaml
+service/report-api-local created
+service/report-api-lb created
+[exit code: 0]
+
+=== 2026-10-12 16:40:40 EDT ===
+$ curl http://34.136.13.145/health
+curl: (7) Failed to connect to 34.136.13.145:80 after 60 ms: Could not connect to server
+[exit code: 7]
+
+=== 2026-10-12 16:53:32 EDT ===
+$ curl http://34.136.13.145/health
+  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
+                                 Dload  Upload  Total   Spent   Left   Speed
+  0      0   0      0   0      0      0      0                              0100     57 100     57   0      0    134      0                              0100     57 100     57   0      0    134      0                              0100     57 100     57   0      0    134      0                              0
+{"pod":"report-api-7c4d7fc5d7-plwgb","status":"healthy"}
+[exit code: 0]
+
+=== 2026-10-12 16:54:30 EDT ===
+$ curl http://34.136.13.145/api/report?symbol=NVDA
+  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
+                                 Dload  Upload  Total   Spent   Left   Speed
+  0      0   0      0   0      0      0      0                              0100    103 100    103   0      0    440      0                              0100    103 100    103   0      0    440      0                              0100    103 100    103   0      0    440      0                              0
+{"compute_ms":118.94,"pod":"report-api-7c4d7fc5d7-plwgb","signal":6085,"symbol":"NVDA","window":60297}
+[exit code: 0]
+

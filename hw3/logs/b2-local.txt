@@ -1,0 +1,76 @@
+=== 2026-10-11 16:49:36 EDT ===
+$ docker build -t report-api:v1 k8s-app/k8s-app/
+#0 building with "default" instance using docker driver
+
+#1 [internal] load .dockerignore
+#1 transferring context: 97B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.63kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.12-slim
+#3 DONE 0.4s
+
+#4 [1/6] FROM docker.io/library/python:3.12-slim@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 63B done
+#5 DONE 0.0s
+
+#6 [2/6] WORKDIR /app
+#6 CACHED
+
+#7 [3/6] COPY requirements.txt .
+#7 CACHED
+
+#8 [4/6] RUN pip install --no-cache-dir -r requirements.txt
+#8 CACHED
+
+#9 [5/6] COPY app.py .
+#9 CACHED
+
+#10 [6/6] RUN useradd --uid 10001 --no-create-home --shell /usr/sbin/nologin appuser
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:462535be5f41ab843a4bdf3316d23875d8e6df441f7e6d4b0db38fee789cca27 done
+#11 naming to docker.io/library/report-api:v1 done
+#11 DONE 0.0s
+
+What's Next?
+  View a summary of image vulnerabilities and recommendations → docker scout quickview
+[exit code: 0]
+
+=== 2026-10-11 16:55:36 EDT ===
+$ curl http://localhost:8080/health
+  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
+                                 Dload  Upload  Total   Spent   Left   Speed
+  0      0   0      0   0      0      0      0                              0100     42 100     42   0      0   5646      0                              0100     42 100     42   0      0   5615      0                              0100     42 100     42   0      0   5603      0                              0
+{"pod":"8a9e91c6b6eb","status":"healthy"}
+[exit code: 0]
+
+=== 2026-10-11 16:56:19 EDT ===
+$ curl http://localhost:8080/api/report?symbol=AAPL
+  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
+                                 Dload  Upload  Total   Spent   Left   Speed
+  0      0   0      0   0      0      0      0                              0100     87 100     87   0      0   2745      0                              0100     87 100     87   0      0   2742      0                              0100     87 100     87   0      0   2741      0                              0
+{"compute_ms":29.15,"pod":"8a9e91c6b6eb","signal":6083,"symbol":"AAPL","window":60286}
+[exit code: 0]
+
+=== 2026-10-11 16:56:46 EDT ===
+$ curl http://localhost:8080/metrics
+  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
+                                 Dload  Upload  Total   Spent   Left   Speed
+  0      0   0      0   0      0      0      0                              0100     89 100     89   0      0  46018      0                              0100     89 100     89   0      0  45524      0                              0100     89 100     89   0      0  45246      0                              0
+{"cache_hit_rate":0.0,"cache_hits":0,"cache_misses":1,"pod":"8a9e91c6b6eb","requests":1}
+[exit code: 0]
+
+=== 2026-10-11 17:07:24 EDT ===
+$ docker exec 8a9e91c6b6eb id
+uid=10001(appuser) gid=10001(appuser) groups=10001(appuser)
+[exit code: 0]
+

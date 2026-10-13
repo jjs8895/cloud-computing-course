@@ -1,0 +1,63 @@
+=== 2026-10-12 12:31:44 EDT ===
+$ kind create cluster --name cmpe789-hw3 --config k8s-app/k8s-app/k8s/kind-config.yaml
+Creating cluster "cmpe789-hw3" ...
+ • Ensuring node image (kindest/node:v1.37.0) 🖼️  ...
+ ✓ Ensuring node image (kindest/node:v1.37.0) 🖼️
+ • Preparing nodes 📦   ...
+ ✓ Preparing nodes 📦 
+ • Writing configuration 📜  ...
+ ✓ Writing configuration 📜
+ • Starting control-plane 🕹️  ...
+ ✓ Starting control-plane 🕹️
+ • Installing CNI 🔌  ...
+ ✓ Installing CNI 🔌
+ • Installing StorageClass 💾  ...
+ ✓ Installing StorageClass 💾
+Set kubectl context to "kind-cmpe789-hw3"
+You can now use your cluster with:
+
+kubectl cluster-info --context kind-cmpe789-hw3
+
+Not sure what to do next? 😅  Check out https://kind.sigs.k8s.io/docs/user/quick-start/
+[exit code: 0]
+
+=== 2026-10-12 12:34:08 EDT ===
+$ kubectl cluster-info --context kind-cmpe789-hw3
+Kubernetes control plane is running at https://127.0.0.1:34595
+CoreDNS is running at https://127.0.0.1:34595/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+[exit code: 0]
+
+=== 2026-10-12 12:34:47 EDT ===
+$ kind load docker-image report-api:v1 --name cmpe789-hw3
+Image: "report-api:v1" with ID "sha256:462535be5f41ab843a4bdf3316d23875d8e6df441f7e6d4b0db38fee789cca27" not yet present on node "cmpe789-hw3-control-plane", loading...
+[exit code: 0]
+
+=== 2026-10-12 12:40:43 EDT ===
+$ kubectl apply -f k8s-app/k8s-app/k8s/deployment.yaml
+deployment.apps/report-api created
+[exit code: 0]
+
+=== 2026-10-12 12:41:13 EDT ===
+$ kubectl apply -f k8s-app/k8s-app/k8s/service.yaml
+service/report-api-local created
+service/report-api-lb created
+[exit code: 0]
+
+=== 2026-10-12 12:54:34 EDT ===
+$ curl http://localhost:30080/health
+  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
+                                 Dload  Upload  Total   Spent   Left   Speed
+  0      0   0      0   0      0      0      0                              0100     57 100     57   0      0  26158      0                              0100     57 100     57   0      0  25583      0                              0100     57 100     57   0      0  25322      0                              0
+{"pod":"report-api-76dc996c86-zxwrr","status":"healthy"}
+[exit code: 0]
+
+=== 2026-10-12 12:54:54 EDT ===
+$ curl http://localhost:30080/api/report?symbol=AAPL
+  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
+                                 Dload  Upload  Total   Spent   Left   Speed
+  0      0   0      0   0      0      0      0                              0100    102 100    102   0      0   3033      0                              0100    102 100    102   0      0   3030      0                              0100    102 100    102   0      0   3028      0                              0
+{"compute_ms":31.03,"pod":"report-api-76dc996c86-zxwrr","signal":6083,"symbol":"AAPL","window":60286}
+[exit code: 0]
+

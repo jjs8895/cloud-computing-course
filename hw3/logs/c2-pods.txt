@@ -1,0 +1,55 @@
+=== 2026-10-13 16:09:55 EDT ===
+$ kind load docker-image report-api:v2 --name cmpe789-hw3
+Image: "report-api:v2" with ID "sha256:097359c4a284a86282dd4824dd7171a806aa7f838c5dac93a9adc7863456815a" not yet present on node "cmpe789-hw3-control-plane", loading...
+[exit code: 0]
+
+=== 2026-10-13 16:10:23 EDT ===
+$ kubectl apply -f k8s/deployment.yaml
+error: error validating "k8s/deployment.yaml": error validating data: failed to download openapi: Get "http://localhost:8080/openapi/v2?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused; if you choose to ignore these errors, turn validation off with --validate=false
+[exit code: 1]
+
+=== 2026-10-13 16:10:54 EDT ===
+$ kubectl apply -f k8s/deployment.yaml
+error: error validating "k8s/deployment.yaml": error validating data: failed to download openapi: Get "http://localhost:8080/openapi/v2?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused; if you choose to ignore these errors, turn validation off with --validate=false
+[exit code: 1]
+
+=== 2026-10-13 16:13:47 EDT ===
+$ kubectl apply -f k8s/deployment.yaml
+deployment.apps/report-api configured
+[exit code: 0]
+
+=== 2026-10-13 16:14:13 EDT ===
+$ kubectl rollout status deployment/report-api
+deployment "report-api" successfully rolled out
+[exit code: 0]
+
+=== 2026-10-13 16:28:16 EDT ===
+$ kind load docker-image report-api:v3 --name cmpe789-hw3
+Image: "report-api:v3" with ID "sha256:45c653bba02e8e8de4c4666686e62fc8304eec59e5656394d1ee8fcd44a9b5f3" not yet present on node "cmpe789-hw3-control-plane", loading...
+[exit code: 0]
+
+=== 2026-10-13 16:28:52 EDT ===
+$ kubectl apply -f k8s/deployment.yaml
+deployment.apps/report-api configured
+[exit code: 0]
+
+=== 2026-10-13 16:29:10 EDT ===
+$ kubectl rollout status deployment/report-api
+deployment "report-api" successfully rolled out
+[exit code: 0]
+
+=== 2026-10-13 16:45:15 EDT ===
+$ kind load docker-image report-api:v4 --name cmpe789-hw3
+Image: "report-api:v4" with ID "sha256:a831667bb64da0a3601e22e3c54c0d7227547a05772747796683e47aeaf34f61" not yet present on node "cmpe789-hw3-control-plane", loading...
+[exit code: 0]
+
+=== 2026-10-13 16:45:46 EDT ===
+$ kubectl apply -f k8s/deployment.yaml
+deployment.apps/report-api configured
+[exit code: 0]
+
+=== 2026-10-13 16:45:53 EDT ===
+$ kubectl rollout status deployment/report-api
+deployment "report-api" successfully rolled out
+[exit code: 0]
+

@@ -1,0 +1,34 @@
+# Two services are defined here, separated by ---.
+#
+# report-api-local is a NodePort used by the kind cluster (Part B Step 3a, Part C).
+# report-api-lb is a LoadBalancer used by GKE (Part B Step 3b). It provisions a real,
+# billable external IP, which is one of the reasons you delete the GKE cluster as soon
+# as you have captured your evidence.
+apiVersion: v1
+kind: Service
+metadata:
+  name: report-api-local
+spec:
+  type: NodePort
+  selector:
+    app: report-api
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+      # Matches the extraPortMappings entry in kind-config.yaml, which is what lets you
+      # reach the service at http://localhost:30080 from your host machine.
+      nodePort: 30080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: report-api-lb
+spec:
+  type: LoadBalancer
+  selector:
+    app: report-api
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080

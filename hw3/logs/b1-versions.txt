@@ -1,0 +1,55 @@
+=== 2026-10-11 16:34:39 EDT ===
+$ docker --version
+Docker version 24.0.6, build ed223bc
+[exit code: 0]
+
+=== 2026-10-11 16:35:08 EDT ===
+$ kubectl version --client
+Client Version: v1.37.1
+Kustomize Version: v5.8.1
+[exit code: 0]
+
+=== 2026-10-11 16:35:20 EDT ===
+$ kind --version
+kind version 0.34.0-alpha+54e57d2af1f9b2
+[exit code: 0]
+
+=== 2026-10-11 16:38:24 EDT ===
+$ ls -la . k8s-app perf-optimization
+.:
+total 70756
+drwxr-xr-x 6 jsava jsava     4096 Oct 11 16:33 .
+drwxr-xr-x 6 jsava jsava     4096 Oct 11 15:11 ..
+drwxr-xr-x 2 jsava jsava     4096 Oct 11 15:11 concepts
+drwxr-xr-x 3 jsava jsava     4096 Oct 11 15:22 k8s-app
+-rw-r--r-- 1 jsava jsava 10530942 Oct 11 16:33 kind
+-rw-r--r-- 1 jsava jsava 61886626 Oct 11 16:32 kubectl
+-rwxr-xr-x 1 jsava jsava     2251 Oct 11 15:29 log.sh
+drwxr-xr-x 2 jsava jsava     4096 Oct 11 16:38 logs
+drwxr-xr-x 2 jsava jsava     4096 Oct 11 15:11 perf-optimization
+
+k8s-app:
+total 12
+drwxr-xr-x 3 jsava jsava 4096 Oct 11 15:22 .
+drwxr-xr-x 6 jsava jsava 4096 Oct 11 16:33 ..
+drwxr-xr-x 3 jsava jsava 4096 Oct 11 15:22 k8s-app
+
+perf-optimization:
+total 8
+drwxr-xr-x 2 jsava jsava 4096 Oct 11 15:11 .
+drwxr-xr-x 6 jsava jsava 4096 Oct 11 16:33 ..
+[exit code: 0]
+
+=== 2026-10-11 16:39:21 EDT ===
+$ ls -la k8s-app/k8s-app
+total 36
+drwxr-xr-x 3 jsava jsava 4096 Oct 11 15:22 .
+drwxr-xr-x 3 jsava jsava 4096 Oct 11 15:22 ..
+-rwxr-xr-x 1 jsava jsava   57 Oct 11 15:22 .dockerignore
+-rwxr-xr-x 1 jsava jsava 1587 Oct 11 15:22 Dockerfile
+-rwxr-xr-x 1 jsava jsava 1708 Oct 11 15:22 K8S_DEPLOYMENT_GUIDE_TEMPLATE.md
+-rwxr-xr-x 1 jsava jsava 5226 Oct 11 15:22 app.py
+drwxr-xr-x 2 jsava jsava 4096 Oct 11 15:22 k8s
+-rwxr-xr-x 1 jsava jsava   46 Oct 11 15:22 requirements.txt
+[exit code: 0]
+

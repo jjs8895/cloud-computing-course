@@ -1,0 +1,11 @@
+=== 2026-10-12 17:03:01 EDT ===
+$ kubectl delete -f k8s/service.yaml       # releases the load balancer IP first
+Error from server (NotFound): error when deleting "k8s/service.yaml": services "report-api-local" not found
+Error from server (NotFound): error when deleting "k8s/service.yaml": services "report-api-lb" not found
+[exit code: 1]
+
+(base) jsava@JobsComputer:~/cloud-computing-course/hw3/k8s-app/k8s-app$ gcloud container clusters delete cmpe789-hw3 --zone=us-central1-a                                                                                                 The following clusters will be deleted.                                                                               - [cmpe789-hw3] in [us-central1-a]                                                                                                                                                                                                       Do you want to continue (Y/n)?  Y                                                                                                                                                                                                         Deleting cluster cmpe789-hw3...done.                                                                                 Deleted [https://container.googleapis.com/v1/projects/hw1concepts/zones/us-central1-a/clusters/cmpe789-hw3].   
+=== 2026-10-12 17:08:39 EDT ===
+$ gcloud container clusters list
+[exit code: 0]
+

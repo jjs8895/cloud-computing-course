@@ -1,0 +1,29 @@
+=== 2026-10-13 16:46:11 EDT ===
+$ python3 loadgen.py --url http://localhost:30080 --pattern hot   --duration 30 --concurrency 10 --label optimized-hot   --json-out results/optimized-hot.json
+Target       : http://localhost:30080
+Pattern      : hot (8 distinct symbols)
+Duration     : 30s
+Concurrency  : 10
+Running...
+
+==========================================================
+  RESULTS  (hot pattern, 10 clients)
+==========================================================
+  Throughput        :     327.09 req/s
+  Requests OK       :       9829
+  Requests failed   :          0  (0.0%)
+  ------------------------------------------------------
+  Latency mean      :      30.53 ms
+  Latency p50       :       7.25 ms
+  Latency p90       :      86.60 ms
+  Latency p95       :      89.15 ms
+  Latency p99       :      94.41 ms
+  Latency max       :    1241.69 ms
+  ------------------------------------------------------
+  Pods observed     : 1 ['report-api-6bf8dd85f7-xdn5d']
+  Cache hit rate    :     0.9980  (4915 hits / 10 misses, sampled from pod report-api-6bf8dd85f7-xdn5d)
+==========================================================
+
+Saved results to results/optimized-hot.json
+[exit code: 0]
+
